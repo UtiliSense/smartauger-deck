@@ -1792,6 +1792,16 @@
       </div>
 
     </div>
+
+    <!-- Instructional arrow pointing up to Deploy button -->
+    <div id="deployCTA" style="display:flex; align-items:center; gap:12px; padding:8px 10px 0; flex-shrink:0;">
+      <svg width="36" height="48" viewBox="0 0 36 48" fill="none" style="flex-shrink:0; opacity:0.6;">
+        <path d="M18 44 V12 Q18 6 24 6 H32" stroke="#00D4C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M12 18 L18 6 L24 18" stroke="#00D4C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span style="font-family:'Syne','Inter',sans-serif; font-size:18px; font-weight:800; color:rgba(255,255,255,0.7); letter-spacing:1px; text-transform:uppercase;">Click here to analyze this data instantly.</span>
+    </div>
+
   </div>
 </section>
 
@@ -3142,7 +3152,17 @@ function highlightMultiple(ids) {
 
 function setDetectionOpacity(val) {
   var o = val / 100;
-  document.querySelectorAll('.demo-detection').forEach(function(el) { el.style.opacity = o; });
+  // B-scan detection boxes
+  document.querySelectorAll('.demo-detection').forEach(function(el) {
+    el.style.opacity = o;
+  });
+  // The entire detection overlay
+  var overlay = document.getElementById('detectionOverlay');
+  if (overlay) overlay.style.opacity = o;
+  // Map markers
+  Object.values(demoMapMarkers).forEach(function(m) {
+    m.setStyle({ fillOpacity: o, opacity: o });
+  });
 }
 
 function clearHighlights() {
@@ -3341,9 +3361,11 @@ function runDemoScan() {
   btn.textContent = 'Scanning...';
   btn.style.opacity = '0.6';
   btn.style.cursor = 'default';
-  // Hide instructional CTA
+  // Hide instructional CTAs
   const cta = document.getElementById('demoCTA');
   if (cta) cta.style.opacity = '0';
+  const deployCta = document.getElementById('deployCTA');
+  if (deployCta) deployCta.style.opacity = '0';
   if (cta) cta.style.transition = 'opacity 0.5s';
 
   const scanLine = document.getElementById('demoScanLine');
