@@ -1567,6 +1567,10 @@
           <div style="display:flex; align-items:center; gap:12px;">
             <span style="font-size:10px; color:rgba(255,255,255,0.25);">line47.dt1 &middot; 463.9 ft &middot; 250 MHz</span>
             <span id="demoDetCount" style="font-size:10px; font-weight:700; color:var(--cyan); opacity:0; transition:opacity 0.5s;">37 DETECTIONS</span>
+            <span style="display:flex; align-items:center; gap:6px; margin-left:8px;">
+              <span style="font-size:9px; color:rgba(255,255,255,0.3); letter-spacing:0.5px;">OPACITY</span>
+              <input id="detOpacitySlider" type="range" min="0" max="100" value="100" oninput="setDetectionOpacity(this.value)" style="width:70px; height:4px; accent-color:#00D4C8; cursor:pointer;">
+            </span>
           </div>
         </div>
 
@@ -3134,6 +3138,11 @@ function highlightMultiple(ids) {
       }
     }
   }
+}
+
+function setDetectionOpacity(val) {
+  var o = val / 100;
+  document.querySelectorAll('.demo-detection').forEach(function(el) { el.style.opacity = o; });
 }
 
 function clearHighlights() {
