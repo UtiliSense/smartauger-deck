@@ -37,13 +37,19 @@
   }
 
   /* ── PRESENTATION CONTAINER ── */
+  .deck-wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
   .deck {
     width: 1920px;
     height: 1080px;
-    position: absolute;
-    top: 50%; left: 50%;
-    transform-origin: center center;
-    transform: translate(-50%, -50%);
+    position: relative;
+    flex-shrink: 0;
   }
 
   .slide {
@@ -757,6 +763,7 @@
   </div>
 </div>
 
+<div class="deck-wrapper">
 <div class="deck" id="deck">
 <div class="progress-bar" id="progressBar"></div>
 
@@ -2714,14 +2721,15 @@
 </div>
 
 </div><!-- end .deck -->
+</div><!-- end .deck-wrapper -->
 
 <script>
-// ── Auto-scale: 1920x1080 deck scaled via transform to fit any screen ──
+// ── Auto-scale: CSS zoom on .deck — scales visuals AND pointer events correctly ──
 (function() {
   var deck = document.getElementById('deck');
   function scaleDeck() {
     var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-    deck.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    deck.style.zoom = s;
   }
   scaleDeck();
   window.addEventListener('resize', scaleDeck);
