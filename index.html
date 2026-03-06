@@ -32,20 +32,25 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: var(--navy);
+    background: #000;
     font-family: 'Inter', sans-serif;
+    margin: 0; padding: 0;
   }
 
-  /* ── PRESENTATION CONTAINER ── */
+  /* ── PRESENTATION CONTAINER — fixed 1920x1080 with auto-scale ── */
   .deck {
-    width: 100vw;
-    height: 100vh;
+    width: 1920px;
+    height: 1080px;
     position: relative;
+    transform-origin: top left;
+    background: var(--navy);
   }
 
   .slide {
     position: absolute;
-    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    top: 0; left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2692,6 +2697,23 @@
 
 
 <script>
+// ── Auto-scale deck to fit any viewport ──
+(function() {
+  const BASE_W = 1920, BASE_H = 1080;
+  const deck = document.getElementById('deck');
+  function scaleDeck() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const scale = Math.min(vw / BASE_W, vh / BASE_H);
+    deck.style.transform = 'scale(' + scale + ')';
+    // Center the deck if there's leftover space
+    const scaledW = BASE_W * scale, scaledH = BASE_H * scale;
+    deck.style.marginLeft = ((vw - scaledW) / 2) + 'px';
+    deck.style.marginTop = ((vh - scaledH) / 2) + 'px';
+  }
+  scaleDeck();
+  window.addEventListener('resize', scaleDeck);
+})();
+
 const SLIDE_TITLES = [
   'Cover', 'The Setup', 'Market & TAM', 'The Problem',
   'The Solution', 'Interactive Demo', 'The Outcome',
