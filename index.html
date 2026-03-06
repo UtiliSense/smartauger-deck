@@ -1401,7 +1401,7 @@
 
     <!-- Headline -->
     <div class="build" data-delay="200">
-      <div style="font-family:'Inter',sans-serif; font-size:clamp(42px, 5vw, 90px); line-height:1.05; font-weight:900; letter-spacing:-2px; text-align:left;">
+      <div style="font-family:'Inter',sans-serif; font-size:90px; line-height:1.05; font-weight:900; letter-spacing:-2px; text-align:left;">
         The Data Exists.<br><span class="cyan">The Bottleneck Is Human.</span>
       </div>
     </div>
@@ -1459,16 +1459,15 @@
   <!-- Left-side GPR Data Image -->
   <div class="build-left" data-delay="800" style="
     position: absolute;
-    top: 50%; left: 3vw;
+    top: 50%; left: 40px;
     transform: translateY(-50%);
     z-index: 1;
     overflow: hidden;
     border-radius: 8px;
-    max-width: 20vw;
   ">
     <img src="dataexists.png" alt="GPR Data" style="
       display: block;
-      height: clamp(300px, 55vh, 600px);
+      height: 620px;
       width: auto;
     ">
   </div>
@@ -2001,7 +2000,7 @@
   </div>
 
   <div class="build-scale mt-32 text-center" data-delay="600">
-    <div class="stat-value glow-text" style="font-size:clamp(48px, 5.5vw, 88px); color:var(--cyan-dim);">91&ndash;94%</div>
+    <div class="stat-value glow-text" style="font-size:88px; color:var(--cyan-dim);">91&ndash;94%</div>
     <div class="muted" style="font-size:22px; letter-spacing:2px; text-transform:uppercase;">F1 Accuracy in Utility Detection</div>
   </div>
 
@@ -2717,6 +2716,19 @@
 
 
 <script>
+// ── Auto-zoom: design at 1920x1080, CSS zoom scales everything uniformly ──
+// Unlike transform:scale(), CSS zoom recalculates viewport units (vw/vh/clamp)
+// so all content thinks it's rendering at ~1920x1080 regardless of screen size.
+(function() {
+  const BASE_W = 1920, BASE_H = 1080;
+  function applyZoom() {
+    const z = Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
+    document.documentElement.style.zoom = z;
+  }
+  applyZoom();
+  window.addEventListener('resize', applyZoom);
+})();
+
 const SLIDE_TITLES = [
   'Cover', 'The Setup', 'Market & TAM', 'The Problem',
   'The Solution', 'Interactive Demo', 'The Outcome',
