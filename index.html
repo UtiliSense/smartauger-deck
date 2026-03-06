@@ -481,7 +481,7 @@
 
   /* ── NAVIGATION ── */
   .nav-bar {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
@@ -586,7 +586,7 @@
 
   /* ── PROGRESS BAR ── */
   .progress-bar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     height: 3px;
@@ -765,9 +765,8 @@
   </div>
 </div>
 
-<div class="progress-bar" id="progressBar"></div>
-
 <div class="deck" id="deck">
+<div class="progress-bar" id="progressBar"></div>
 
 <!-- ══════════════════════════════════════════════════════════
      SLIDE 01 — COVER
@@ -2699,9 +2698,6 @@
   </div>
 </section>
 
-</div><!-- end .deck -->
-
-
 <!-- NAVIGATION BAR -->
 <div class="nav-bar">
   <div class="nav-left">
@@ -2725,6 +2721,7 @@
   </div>
 </div>
 
+</div><!-- end .deck -->
 
 <script>
 // ── Auto-zoom: design at 1920x1080, CSS zoom scales everything uniformly ──
