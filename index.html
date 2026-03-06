@@ -2854,6 +2854,7 @@ function prevSlide() { goToSlide(currentSlide - 1); }
 
 // Keyboard navigation
 document.addEventListener('keydown', e => {
+  if (currentSlide === 5) return; // Page 6: keyboard nav disabled
   if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
     e.preventDefault();
     nextSlide();
